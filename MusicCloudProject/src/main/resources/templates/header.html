@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lagn="ko" xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="headFragment">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+.title{
+position:absolute;
+font-size: 30px;
+font-weight: 700;
+color:#5497b8;
+top:20px;
+left:50px;
+}
+.search{
+position:absolute;
+left:280px;
+top:25px;
+width:400px;
+height:40px;
+background-color: #f6f8f7;
+border-radius: 15px;
+}
+.searchBtn{
+position:absolute;
+left:700px;
+top:25px;
+width:70px;
+height:40px;
+background-color: #4999c7;
+border-radius: 15px;
+text-align: center;
+}
+.searchBtn p{
+position:absolute;
+top:-3px;
+left:25px;
+color:white;
+}
+</style>
+</head>
+<body>
+	<p class="title">Music Cloud</p>
+	<div class="search"></div>
+	<div class="searchBtn"><p><i class="fas fa-search"></i></p></div>
+</body>
+</th:block>
+</html>

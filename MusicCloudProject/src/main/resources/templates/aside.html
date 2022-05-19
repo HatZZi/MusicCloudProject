@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lagn="ko" xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="asideFragment">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+.asidebg{
+position: absolute;
+width:250px;
+height:750px;
+left:0px;
+top:100px;
+
+}
+.menu{
+position:relative;
+width:250px;
+height:50px;
+left:0px;
+margin-top: 15px;
+margin-bottom: 15px;
+}
+.menu:hover{
+background-color: #ecf1f6;
+border-left: 5px solid #2e6b9c;
+}
+.menu a{
+position:absolute;
+top:13px;
+left:50px;
+text-decoration: none;
+font-size: 20px;
+font-weight: 500;
+color:#999999;
+}
+.menu a:hover{
+text-decoration: none;
+font-size: 20px;
+font-weight: 700;
+color:#497aa3;
+}
+</style>
+
+</head>
+<body>
+	<div class="asidebg">
+		<div class="menu">
+			<a th:href="@{/(cate=1)}" >Top 200</a>
+		</div>
+		<div class="menu">
+			<a th:href="@{/(cate=2)}" >가요</a>
+		</div>
+		<div class="menu">
+			<a th:href="@{/(cate=3)}" >POP</a>
+		</div>
+		<div class="menu">
+			<a th:href="@{/(cate=4)}" >OST</a>
+		</div>
+		<div class="menu">
+			<a th:href="@{/(cate=5)}" >재즈</a>
+		</div>
+		<div class="menu">
+			<a th:href="@{/(cate=6)}" >클래식</a>
+		</div>
+		<div class="menu">
+			<a th:href="@{/(cate=7)}" >동요</a>
+		</div>
+	</div>
+</body>
+</th:block>
+</html>

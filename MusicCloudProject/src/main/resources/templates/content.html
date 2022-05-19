@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lagn="ko" xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="contentFragment">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+.sizing{
+width:1050px;
+height:725px;
+position:absolute;
+top:115px;
+left:280px;
+overflow:auto;
+-ms-overflow-style: none;
+}
+.sizing::-webkit-scrollbar{ 
+display:none; 
+}
+.contentbg{
+width:1050px;
+height:1650px;
+position:absolute;
+border-radius: 20px;
+background-color: #f6f8f7;
+}
+.top5{
+position:absolute;
+top:70px;
+right:0px;
+width: 1000px;
+height:300px;
+overflow:hidden;
+}
+.makeoverflow{
+position:absolute;
+top:0px;
+left:0px;
+margin:0px;
+width:1200px;
+height:500px;
+}
+.onerank{
+position:relative;
+display:inline-block;
+width:250px;
+height:250px;
+background-color: blue;
+margin:20px;
+border-radius: 20px;
+text-align: center;
+}
+.righterPosition{
+position:absolute;
+right:30px;
+top:130px;
+z-index:3;
+width:30px;
+height:30px;
+}
+.topPoster{
+width:100%;
+height:100%;
+border-radius: 20px;
+}
+.topinfo{
+position:absolute;
+bottom:20px;
+left:25px;
+z-index: 3;
+width:210px;
+height:100px;
+background-color: rgba(255,255,255,0.7);
+border-radius: 20px;
+}
+p{
+line-height:5px; 
+}
+.title_2{
+position:absolute;
+font-size: 25px;
+font-weight: 600;
+color:#416f97;
+top:20px;
+left:70px;
+}
+.title_3{
+position:absolute;
+font-size: 25px;
+font-weight: 600;
+color:#416f97;
+top:380px;
+left:70px;
+}
+.chart{
+position:absolute;
+top:440px;
+left:70px;
+width:870px;
+height:1100px;
+background-color: white;
+border-radius: 20px;
+padding:30px;
+}
+th{
+font-size: 18px;
+font-weight: 600;
+color:#416f97;
+}
+.alinging{
+text-align: center;
+}
+.alinging2{
+width:150px;
+}
+.box{
+width:800px;
+height:300px;
+}
+.thumb{
+position:relative;
+width:40px;
+height:40px;
+
+}
+table{
+width:880px;
+height:500px;
+}
+.linegap{
+margin-top:30px;
+height:45px;
+}
+.paging{
+width:150px;
+height:50px;
+position:absolute;
+bottom:30px;
+left:380px;
+}
+.paging a{
+text-decoration:none;
+font-size: 18px;
+font-weight: 600;
+color:#416f97;
+margin:10px;
+display: inline-block;
+}
+.paging p{
+font-size: 18px;
+font-weight: 600;
+color:black;
+margin:10px;
+display: inline-block;
+}
+.positions{
+left:-10px;
+text-align: left;
+}
+.profile{
+position:relative;
+width:298.86px;
+height:697.61px;
+float:right;
+top:80px;
+}
+</style>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery.js"></script>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+<script>
+  $( function() {
+     
+    /* $( "#dialog" ).dialog(); */
+    $('.play').hover(function(){
+       $(this).css("cursor","pointer")
+    },function(){
+       $(this).css("cursor","")
+    })
+    
+    // 아이콘 클릭시 처리 
+    $('.play').click(function(){
+       let no=$(this).attr("data-no");
+       $.ajax({
+          type:'get',
+          url:'/detail',
+          data:{'no':no},
+          success:function(res)
+          {
+             console.log(res);
+             
+             //let json=JSON.parse(res);
+             $('#youtube').attr("src","http://youtube.com/embed/"+res.youtube)
+             $('#lyric').text(res.lyric)
+             
+             $('#dialog').dialog({
+                autoOpen:false,
+                width:700,
+                height:650,
+                modal:true
+             }).dialog("open");
+          }
+       })
+    })
+})
+</script>
+</head>
+<body>
+	<img class="profile" th:src="@{/image/profile.png}">
+	<div class="sizing">
+		<div class="contentbg">
+			<p class="title_2">Top 5</p>
+			<div class="top5">
+				<div class="righterPosition">
+					<img class="righter" th:src="@{/image/righter.png}">
+				</div>
+			<div class="makeoverflow">
+				<div class="onerank" th:each="vo:${list}">
+					<img class="topPoster" th:src="${vo.poster}">
+					<div class="topinfo">
+						<h3 th:text="${vo.title.length>=8?#strings.substring(vo.title,0,8)+'...':vo.title}"></h3>
+						<p th:text="${vo.album.length>=8?#strings.substring(vo.album,0,8)+'...':vo.album}"></p>
+						<p th:text="${vo.singer.length>=8?#strings.substring(vo.singer,0,8)+'...':vo.singer}"></p>
+					</div>
+				</div>	
+			</div>
+			</div>
+			<p class="title_3">차트 순위</p>
+			<div class="chart">
+				<table>
+				<tr>
+					<th class="positions">포스터</th>
+					<th class="positions2">순위</th>
+					<th>제목</th>
+					<th>가수</th>
+					<th>재생</th>
+				<tr>
+				<tr>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				<tr>
+				<tr class="linegap" th:each="vo:${list}">
+					<td><img th:src="${vo.poster}" class="thumb"></td>
+					<td class="alinging" th:text="${vo.ranks}"></td>
+					<td th:text="${vo.title}">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+					<td class="alinging2" th:text="${vo.singer.length>=15?#strings.substring(vo.singer,0,15)+'...':vo.singer}">가수</td>
+					<td><center><i class="fas fa-play play" th:data-no="${vo.no}"></i></center></td>
+				</tr>
+				</table>
+				<div class="paging">
+					<a th:href="@{/(page=${curpage>1?curpage-1:curpage})}">이전</a>
+					<p th:text="${curpage}"></p>
+					<a th:href="@{/(page=${curpage<totalpage?curpage+1:curpage})}">다음</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	<div class="box" id="dialog" style="display:none"> 
+		<iframe src="" style="width:100%;height:400px;" id="youtube"></iframe>
+		<pre id="lyric"></pre>
+	</div>
+	<!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
+	<script type="text/javascript"
+		src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script> 
+
+	<script>
+		$(document).ready(function() {
+			$('.makeoverflow').slick({
+				prevArrow : $(".lefter"),
+				nextArrow : $(".righter"),
+				infinite : true,
+				speed : 300,
+				slidesToShow : 4,
+				slidesToScroll : 1
+			});
+		});
+	</script>
+</body>
+</th:block>
+</html>

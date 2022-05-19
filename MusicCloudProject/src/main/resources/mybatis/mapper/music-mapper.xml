@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.music.dao.MusicMapper">
+	<select id="musicListData" resultType="com.sist.music.vo.MusicVO"
+	parameterType="hashmap">	
+	
+		SELECT no,cate,ranks,increments,likes,state,
+		title,album,singer,genre,time,writer1,writer2,editor,
+		lyric,youtube,poster
+		FROM music
+		WHERE cate=#{cate}
+		ORDER BY no ASC
+		limit #{start},#{size}
+	</select>
+	
+	<select id="musicTotalPage" resultType="int" parameterType="int">
+	SELECT CEIL(COUNT(*)/20.0) FROM music
+	WHERE cate=#{cate}
+	</select>
+	
+	<select id="musicDetailData" resultType="com.sist.music.vo.MusicVO"
+	parameterType="int">	
+	
+		SELECT no,cate,ranks,increments,likes,state,
+		title,album,singer,genre,time,writer1,writer2,editor,
+		lyric,youtube,poster
+		FROM music
+		WHERE no=#{no}
+	</select>
+	
+	<!-- <select id="musicTopList" resultType="com.sist.music.vo.MusicVO"
+	parameterType="int">
+		SELECT no,cate,ranks,increments,likes,state,
+		title,album,singer,genre,time,writer1,writer2,editor,
+		lyric,youtube,poster
+		FROM music
+		WHERE cate=#{curcate} AND ranks<6
+		ORDER BY ranks ASC
+	</select> -->
+</mapper>
